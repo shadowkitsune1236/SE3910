@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<style>
+</style>
+<title></title>
+</head>
+<body>
+
+<form>
+    <br>
+    <label for "location" style="margin:5px">Select location:</label>
+    <select name="location" style="margin:5px">
+        <!-- To be populated from database -->
+        <!-- Will require REST API call -->
+        <option value="branch1">Branch 1</option>
+        <option value="branch2">Branch 2</option>
+        <option value="branch3">Branch 3</option>
+    </select>
+    <label for "date" style="margin:5px">Select date:</label>
+    <input type="date" name="date" style="margin:5px">
+    <input type="submit" name="submit" style="margin:10px">
+    <!-- Query to database using "location" and "date" -->
+    <!-- Will require REST API call -->
+    <br>
+    <table cellpadding="25" border="1px">
+        <tr>
+            <th>Location:</th>
+            <th>Date:</th>
+            <th>Customer:</th>
+        </tr>
+    </table>
+</form>
+    
+</body>
+</html>
