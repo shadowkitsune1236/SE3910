@@ -39,17 +39,43 @@
     </div>
     <div><select id="locationSelect" style="width: 10%; visibility: hidden"></select></div>
 	<div id="map"></div>
-    <script>
+    <script type="text/javascript">
+
+		var map;
+    	
 		// Initialize and add the map
 		function initMap() {
-  			// The location of Uluru
-  			var uluru = {lat: -25.344, lng: 131.036};
-  			// The map, centered at Uluru
-  			var map = new google.maps.Map(
-      			document.getElementById('map'), {zoom: 4, center: uluru});
-  			// The marker, positioned at Uluru
-  			var marker = new google.maps.Marker({position: uluru, map: map});
+  			// The location of the default center of the map
+  			var center = {lat: 39.0997, lng: -94.5786};
+  			// The map centered 
+  			map = new google.maps.Map(
+      			document.getElementById('map'), {zoom: 11, center: center});
+
+  			// Example Marker
+  			var marker = new google.maps.Marker({position: {lat: 39.0997, lng: -94.5786}, map: map});
 		}
+		
+	    function triggerInput() {
+	        var zipCode = document.getElementById('addressInput').value;
+	     	// This is creating the GeocoderRequest object
+	        var geocoderRequest = {address: zipCode}
+	        var geocoder = new google.maps.Geocoder();
+	     	// This is making the Geocode request
+	        geocoder.geocode(geocoderRequest, function(results, status) {
+	        	// Check if status is OK before proceeding
+	            if (status == google.maps.GeocoderStatus.OK) {
+	            	// Center the map on the returned location
+	                map.setCenter(results[0].geometry.location);
+	                map.setZoom(11);
+	            	console.log(results);
+	            	searchLocationsNear(results[0].geometry.location);
+	            } else {
+	                alert(address + ' not found');
+	            }
+	        })
+	    }
+    	document.getElementById('searchButton')
+    			.addEventListener('click', triggerInput, false);
     </script>
     <script async defer 
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcH0cL9aL8PDd0Cww0Alxjez0rh2vtZkQ&callback=initMap">
